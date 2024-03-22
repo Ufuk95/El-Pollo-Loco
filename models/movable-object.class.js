@@ -1,25 +1,41 @@
-class MovableObject{
+class MovableObject {
     x = 120;
     y = 280;
     img;
-    height = 150;
+    height = 190;
     width = 100;
-
+    ImageCache = [];
+    currentImage = 0;
+    speed = 0.2;
 
     // loadImage(./img/character.png)  (als Beispiel)
-    loadImage(path){
+    loadImage(path) {
         this.img = new Image(); // this.img = document.getElementById('image') <img id='image'>
         this.img.src = path;
     }
 
+    /**
+     * 
+     * @param {Array} array - [img/1.png, img/2.png, ...]
+     */
+    loadImages(array) {
+        array.forEach((path) => {
+            let image = new Image();
+            image.src = path;
+            this.ImageCache[path] = image;
+        });
+
+    }
 
 
-    moveRight(){
+    moveRight() {
         console.log('moving right');
     }
 
 
     moveLeft(){
-        console.log('moving left');
+        setInterval(() => {
+            this.x -= this.speed;
+        }, 1000/ 60);
     }
 }
