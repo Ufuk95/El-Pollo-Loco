@@ -5,7 +5,9 @@ class World {
     canvas;
     keyboard;
     camera_x = -100;
-    healthBar = new Statusbar();
+    healthBar = new Healthbar();
+    coinBar = new Coinbar();
+    bottleBar = new Bottlebar();
     throwableObject = [];
 
     constructor(canvas, keyboard) {
@@ -52,6 +54,14 @@ class World {
 
         this.ctx.translate(-this.camera_x, 0);// backwards
         this.addToMap(this.healthBar);
+        this.ctx.translate(this.camera_x, 0);// forwards
+
+        this.ctx.translate(-this.camera_x, 0);// backwards
+        this.addToMap(this.coinBar);
+        this.ctx.translate(this.camera_x, 0);// forwards
+
+        this.ctx.translate(-this.camera_x, 0);// backwards
+        this.addToMap(this.bottleBar);
         this.ctx.translate(this.camera_x, 0);// forwards
 
         this.addToMap(this.character);
