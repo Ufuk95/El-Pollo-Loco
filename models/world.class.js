@@ -34,10 +34,19 @@ class World {
             }
         })
 
-        this.level.coins.forEach((coin) => {
+        this.level.coins.forEach((coin, index) => {
             if (this.character.isColliding(coin)) {
                 this.character.collectinCoins();
                 this.coinBar.setPercentage(this.character.coin_bar);
+                this.level.coins.splice(index, 1);
+            }
+        })
+
+        this.level.bottles.forEach((bottle, index) => {
+            if (this.character.isColliding(bottle)) {
+                this.character.collectinBottles();
+                this.bottleBar.setPercentage(this.character.bottle);
+                this.level.bottles.splice(index, 1);
             }
         })
 
@@ -58,6 +67,7 @@ class World {
         this.addObjectsToMap(this.level.backgroundObjects);
         this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.level.coins);
+        this.addObjectsToMap(this.level.bottles);
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.throwableObject);
 

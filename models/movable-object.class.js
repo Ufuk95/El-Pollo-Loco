@@ -6,6 +6,7 @@ class MovableObject extends DrawableObject {
     energy = 100;
     lastHit = 0;
     coin_bar = 0;
+    bottle = 0;
 
 
     applyGravity() {
@@ -29,7 +30,14 @@ class MovableObject extends DrawableObject {
         this.coin_bar += 20;
         if (this.coin_bar == 100) {
             this.coin_bar == 100;
-            console.log(this.coin_bar)
+        }
+    }
+
+    collectinBottles(){
+        this.bottle += 20;
+        if (this.bottle == 100) {
+            this.bottle = 100;
+            console.log(this.bottle)
         }
     }
 
