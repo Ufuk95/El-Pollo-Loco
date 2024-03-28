@@ -33,6 +33,14 @@ class World {
                 this.healthBar.setPercentage(this.character.energy);
             }
         })
+
+        this.level.coins.forEach((coin) => {
+            if (this.character.isColliding(coin)) {
+                this.character.collectinCoins();
+                this.coinBar.setPercentage(this.character.coin_bar);
+            }
+        })
+
     };
 
     checkThowableObject(){
@@ -49,6 +57,7 @@ class World {
 
         this.addObjectsToMap(this.level.backgroundObjects);
         this.addObjectsToMap(this.level.clouds);
+        this.addObjectsToMap(this.level.coins);
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.throwableObject);
 

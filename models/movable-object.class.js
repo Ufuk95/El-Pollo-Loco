@@ -5,6 +5,7 @@ class MovableObject extends DrawableObject {
     acceleration = 1.75;
     energy = 100;
     lastHit = 0;
+    coin_bar = 0;
 
 
     applyGravity() {
@@ -21,6 +22,14 @@ class MovableObject extends DrawableObject {
             return true;
         } else {
             return this.y < 175;
+        }
+    }
+
+    collectinCoins(){
+        this.coin_bar += 20;
+        if (this.coin_bar == 100) {
+            this.coin_bar == 100;
+            console.log(this.coin_bar)
         }
     }
 
