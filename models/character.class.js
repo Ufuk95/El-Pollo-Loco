@@ -37,6 +37,12 @@ class Character extends MovableObject {
         '../img/2_character_pepe/4_hurt/H-43.png'
     ];
 
+    offset = {
+        top: 120,
+        left: 20,
+        right: 25,
+        bottom: 130,
+    }
 
     world;
     walking_audio = new Audio('../audio/walking.mp3');
