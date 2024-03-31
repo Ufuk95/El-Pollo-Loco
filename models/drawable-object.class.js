@@ -6,7 +6,7 @@ class DrawableObject {
     y = 280;
     height = 190;
     width = 100;
-    offset = { top: 0, bottom: 0, left: 0, right: 0, };
+    offset = { top: 0, bottom: 0, left: 0, right: 0};
 
 
     // loadImage(./img/character.png)  (als Beispiel)
@@ -57,7 +57,7 @@ class DrawableObject {
                 this.x + this.offset.left,
                 this.y + this.offset.top,
                 this.width - this.offset.right - this.offset.left,
-                this.height - this.offset.bottom);
+                this.height - this.offset.bottom - this.offset.top);
             ctx.stroke();
         }
     }

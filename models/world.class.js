@@ -27,6 +27,7 @@ class World {
     }
 
     checkCollisions(){
+        // colliding with small chicken
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy)) {
                 this.character.hit();
@@ -34,6 +35,7 @@ class World {
             }
         })
 
+        // colliding with coins
         this.level.coins.forEach((coin, index) => {
             if (this.character.isColliding(coin)) {
                 this.character.collectinCoins();
@@ -42,6 +44,7 @@ class World {
             }
         })
 
+        // colliding with salsa bottles
         this.level.bottles.forEach((bottle, index) => {
             if (this.character.isColliding(bottle)) {
                 this.character.collectinBottles();
@@ -49,6 +52,12 @@ class World {
                 this.level.bottles.splice(index, 1);
             }
         })
+
+        // this.level.bottles.forEach((bottle, index) => {
+        //     if (this.level.enemies.isColliding(bottle)) {
+        //         this.level.enemies.splice(index, 1);
+        //     }
+        // })
 
     };
 
