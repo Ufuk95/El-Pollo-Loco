@@ -19,14 +19,27 @@ class World {
         this.run();
     }
 
-    run(){
+    run() {
         setInterval(() => {
             this.checkCollisions();
-            this.checkThowableObject()
+            this.checkThrowableObject();
         }, 200);
     }
 
-    checkCollisions(){
+    checkCollisions() {
+        this.characterCollidingWithEnemy();
+        this.characterCollidingWithCoins();
+        this.characterCollidingWithBottles();
+
+        // this.throwableObject.forEach((enemy, index) => {
+        //     if (this.throwableObject.isColliding(enemy)) {
+        //         this.level.enemies.splice(index, 1);
+        //     }
+        // })
+
+    };
+
+    characterCollidingWithEnemy() {
         // colliding with small chicken
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy)) {
@@ -34,7 +47,9 @@ class World {
                 this.healthBar.setPercentage(this.character.energy);
             }
         })
+    }
 
+    characterCollidingWithCoins() {
         // colliding with coins
         this.level.coins.forEach((coin, index) => {
             if (this.character.isColliding(coin)) {
@@ -43,7 +58,9 @@ class World {
                 this.level.coins.splice(index, 1);
             }
         })
+    }
 
+    characterCollidingWithBottles() {
         // colliding with salsa bottles
         this.level.bottles.forEach((bottle, index) => {
             if (this.character.isColliding(bottle)) {
@@ -52,16 +69,11 @@ class World {
                 this.level.bottles.splice(index, 1);
             }
         })
+    }
 
-        // this.level.bottles.forEach((bottle, index) => {
-        //     if (this.level.enemies.isColliding(bottle)) {
-        //         this.level.enemies.splice(index, 1);
-        //     }
-        // })
 
-    };
 
-    checkThowableObject(){
+    checkThrowableObject() {
         if (this.keyboard.D) {
             let bottle = new ThrowableObject(this.character.x + 50, this.character.y + 50);
             this.throwableObject.push(bottle)
