@@ -8,6 +8,7 @@ class World {
     healthBar = new Healthbar();
     coinBar = new Coinbar();
     bottleBar = new Bottlebar();
+    endbossBar = new EndbossBar();
     throwableObject = [];
 
     constructor(canvas, keyboard) {
@@ -30,12 +31,7 @@ class World {
         this.characterCollidingWithEnemy();
         this.characterCollidingWithCoins();
         this.characterCollidingWithBottles();
-
-        // this.throwableObject.forEach((enemy, index) => {
-        //     if (this.throwableObject.isColliding(enemy)) {
-        //         this.level.enemies.splice(index, 1);
-        //     }
-        // })
+        this.endbossIsCollidingWithBottles();
 
     };
 
@@ -66,16 +62,32 @@ class World {
             if (this.character.isColliding(bottle)) {
                 this.character.collectinBottles();
                 this.bottleBar.setPercentage(this.character.bottle);
+                this.character.bottlesAmount += 20;
+                console.log(this.character.bottlesAmount);
                 this.level.bottles.splice(index, 1);
             }
         })
     }
 
+    endbossIsCollidingWithBottles() {
+        this.throwableObject.forEach((bottle) => {
+            this.level.enemies.forEach((enemy) => {
+                if (bottle.isColliding(enemy)) {
+                    if (enemy instanceof Endboss) {
+                        enemy.endbossEnergy -= 20;
+                        this.endbossBar.setPercentage(enemy.endbossEnergy);
+                        //enemy.lastHit = new Date().getTime();
+                    }
+                }
+            });
+        });
+    }
 
 
     checkThrowableObject() {
         if (this.keyboard.D) {
-            let bottle = new ThrowableObject(this.character.x + 50, this.character.y + 50);
+            // this.character.idleTimer === 0;
+            let bottle = new ThrowableObject(this.character.x + 50, this.character.y + 50, this.character.otherDirection);
             this.throwableObject.push(bottle)
         }
     }
@@ -103,6 +115,13 @@ class World {
         this.ctx.translate(-this.camera_x, 0);// backwards
         this.addToMap(this.bottleBar);
         this.ctx.translate(this.camera_x, 0);// forwards
+
+        // EndbossBar
+        if (this.character.x >= 1500) {
+            this.ctx.translate(-this.camera_x, 0); //back
+            this.addToMap(this.endbossBar);
+            this.ctx.translate(this.camera_x, 0); //forward
+        }
 
         this.addToMap(this.character);
         this.ctx.translate(-this.camera_x, 0);

@@ -114,6 +114,10 @@ class Character extends MovableObject {
 
             if (this.world.keyboard.D) {
                 this.idleTimer = 0;
+                if (!this.isDead()) {
+                    this.loadImage(this.IMAGES_WALKING[0])
+                }
+                
             }
 
             if (
@@ -127,13 +131,13 @@ class Character extends MovableObject {
 
             if (!this.isDead()) {
                 if (this.idleTimer >= 30 * 6) {
-                  // bc 30 frames per second * 6 seconds === after 6 seconds long idle
-                  this.playAnimation(this.IMAGES_LONG_IDLE);
+                    // bc 30 frames per second * 6 seconds === after 6 seconds long idle
+                    this.playAnimation(this.IMAGES_LONG_IDLE);
                 } else if (this.idleTimer >= 30 * 3) {
-                  // bc 30 frames per second * 3 seconds   === after 3 seconds idle starts
-                  this.playAnimation(this.IMAGES_IDLE);
+                    // bc 30 frames per second * 3 seconds   === after 3 seconds idle starts
+                    this.playAnimation(this.IMAGES_IDLE);
                 }
-              }
+            }
 
             this.world.camera_x = -this.x + 75;
         }, 1000 / 30)
@@ -142,27 +146,27 @@ class Character extends MovableObject {
         // IMG Animation for jumping and walking
         setInterval(() => {
             if (this.isDead(this.energy)) {
-              //dead animation
-              this.playDeathAnimation();
+                //dead animation
+                this.playDeathAnimation();
             } else if (this.isAboveGround()) {
-              //jump animation
-              this.playAnimation(this.IMAGES_JUMPING);
+                //jump animation
+                this.playAnimation(this.IMAGES_JUMPING);
             } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
-              //Walk animation
-              this.playAnimation(this.IMAGES_WALKING);
+                //Walk animation
+                this.playAnimation(this.IMAGES_WALKING);
             } else if (this.isHurt()) {
-              this.playAnimation(this.IMAGES_HURT);
-              this.idleTimer = 0;
+                this.playAnimation(this.IMAGES_HURT);
+                this.idleTimer = 0;
             }
-          }, 50);
+        }, 50);
     }
 
     playDeathAnimation() {
         if (!this.deadAnimationPlayed) {
-          // Todesanimation abspielen
-          this.playAnimation(this.IMAGES_DEAD);
-          this.deadAnimationPlayed = true;
+            // Todesanimation abspielen
+            this.playAnimation(this.IMAGES_DEAD);
+            this.deadAnimationPlayed = true;
         }
-      }
+    }
 
 }

@@ -7,6 +7,7 @@ class MovableObject extends DrawableObject {
     lastHit = 0;
     coin_bar = 0;
     bottle = 0;
+    bottlesAmount = 0;
     offset = {
         top: 0,
         bottom: 0,
@@ -59,6 +60,16 @@ class MovableObject extends DrawableObject {
         }
     }
 
+    endbossIsLosingEnergy() {
+        this.endbossEnergy -= 20;
+        if (this.endbossEnergy < 0) {
+            this.endbossEnergy = 0;
+            console.log(this.endbossEnergy);
+        } else {
+            this.lastHit = new Date().getTime();
+        }
+    }
+
 
     /**
      * function for getting hit by enemys
@@ -99,16 +110,25 @@ class MovableObject extends DrawableObject {
     isColliding(mo) {
         return this.x + this.width - this.offset.right > mo.x + mo.offset.left &&
             this.y + this.height - this.offset.bottom > mo.y + mo.offset.top &&
-            this.x +  this.offset.left < mo.x + mo.width - mo.offset.right && 
+            this.x + this.offset.left < mo.x + mo.width - mo.offset.right &&
             this.y + this.offset.top < mo.y + mo.height - mo.offset.bottom;
     }
 
-    isCollidingFromTopToBottom(){
-        return  this.y + this.height - this.offset.bottom > mo.y + mo.offset.top;
+    isCollidingFromTopToBottom() {
+        return this.y + this.height - this.offset.bottom > mo.y + mo.offset.top;
     }
 
-    isCollidingFromBottomToTop(){
+    isCollidingFromBottomToTop() {
         return this.y + this.offset.top < mo.y + mo.height - mo.offset.bottom;
+    }
+
+
+    isCollecting() {
+        this.bottlesAmount += 20;
+        if (this.bottlesAmount > 100) {
+            this.bottlesAmount = 100;
+        }
+        console.log(this.bottlesAmount);
     }
 
     /**
