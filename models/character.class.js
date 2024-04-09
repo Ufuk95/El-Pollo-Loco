@@ -2,6 +2,21 @@ class Character extends MovableObject {
     y = 75;  //175 ist gut
     height = 250;
     speed = 10;
+    timeStamp = 0;
+    idleTimer = 0;
+    deadAnimationPlayed = false;
+    world;
+    walking_audio = new Audio('../audio/walking.mp3');
+    jumping_audio = new Audio('../audio/jump.mp3');
+
+    offset = {
+        top: 120,
+        bottom: 10,
+        left: 20,
+        right: 25
+    }
+    
+
     IMAGES_WALKING = [
         '../img/2_character_pepe/2_walk/W-21.png',
         '../img/2_character_pepe/2_walk/W-22.png',
@@ -63,17 +78,7 @@ class Character extends MovableObject {
         "img/2_character_pepe/1_idle/long_idle/I-20.png",
     ];
 
-    offset = {
-        top: 120,
-        bottom: 10,
-        left: 20,
-        right: 25
-    }
-    idleTimer = 0;
-    deadAnimationPlayed = false;
-    world;
-    walking_audio = new Audio('../audio/walking.mp3');
-    jumping_audio = new Audio('../audio/jump.mp3');
+    
 
     constructor() {
         super().loadImage('../img/2_character_pepe/2_walk/W-21.png');
@@ -168,5 +173,13 @@ class Character extends MovableObject {
             this.deadAnimationPlayed = true;
         }
     }
+
+
+    /**
+     * Set a new time passed by assigning the current timestamp to the 'timeStamp' property.
+     */
+    setNewTimeStamp() {
+        this.timeStamp = new Date().getTime();
+      }
 
 }

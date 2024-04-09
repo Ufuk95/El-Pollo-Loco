@@ -22,9 +22,13 @@ class World {
 
     run() {
         setInterval(() => {
-            this.checkCollisions();
             this.checkThrowableObject();
-        }, 200);
+        }, 300);
+
+        setInterval(() => {
+            this.checkCollisions();
+        }, 100);
+
     }
 
     checkCollisions() {
@@ -60,7 +64,7 @@ class World {
         // colliding with salsa bottles
         this.level.bottles.forEach((bottle, index) => {
             if (this.character.isColliding(bottle)) {
-                this.character.collectinBottles();
+                this.character.addThrowableBottless();
                 this.bottleBar.setPercentage(this.character.bottle);
                 this.character.bottlesAmount += 20;
                 console.log(this.character.bottlesAmount);
@@ -85,11 +89,16 @@ class World {
 
 
     checkThrowableObject() {
-        if (this.keyboard.D) {
-            // this.character.idleTimer === 0;
-            let bottle = new ThrowableObject(this.character.x + 50, this.character.y + 50, this.character.otherDirection);
-            this.throwableObject.push(bottle)
+        if (this.character.bottle > 0) {
+            if (this.keyboard.D) {
+                this.character.setNewTimeStamp();
+                let bottle = new ThrowableObject(this.character.x + 50, this.character.y + 50, this.character.otherDirection);
+                this.throwableObject.push(bottle);
+                this.character.removeThrowableBottles();
+                this.bottleBar.setPercentage(this.character.bottle);
+            }
         }
+        
     }
 
     draw() {// Order is importent (kinda like z-index)

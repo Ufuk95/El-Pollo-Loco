@@ -52,11 +52,17 @@ class MovableObject extends DrawableObject {
     /**
      * function for collecting bottles
      */
-    collectinBottles() {
+    addThrowableBottless() {
         this.bottle += 20;
         if (this.bottle == 100) {
             this.bottle = 100;
-            console.log(this.bottle)
+        }
+    }
+
+    removeThrowableBottles() {
+        this.bottle -= 20;
+        if (this.bottle < 0) {
+            this.bottle = 0;
         }
     }
 
