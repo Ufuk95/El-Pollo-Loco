@@ -75,11 +75,11 @@ class World {
 
     endbossIsCollidingWithBottles() {
         this.throwableObject.forEach((bottle) => {
-            this.level.enemies.forEach((enemy) => {
-                if (bottle.isColliding(enemy)) {
-                    if (enemy instanceof Endboss) {
-                        enemy.endbossEnergy -= 20;
-                        this.endbossBar.setPercentage(enemy.endbossEnergy);
+            this.level.endboss.forEach((endboss) => {
+                if (bottle.isColliding(endboss)) {
+                    if (endboss instanceof Endboss) {
+                        endboss.endbossEnergy -= 20;
+                        this.endbossBar.setPercentage(endboss.endbossEnergy);
                         //enemy.lastHit = new Date().getTime();
                     }
                 }
@@ -111,6 +111,7 @@ class World {
         this.addObjectsToMap(this.level.coins);
         this.addObjectsToMap(this.level.bottles);
         this.addObjectsToMap(this.level.enemies);
+        this.addObjectsToMap(this.level.endboss);
         this.addObjectsToMap(this.throwableObject);
 
         this.ctx.translate(-this.camera_x, 0);// backwards
