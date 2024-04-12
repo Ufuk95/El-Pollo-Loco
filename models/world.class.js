@@ -36,17 +36,45 @@ class World {
         this.characterCollidingWithCoins();
         this.characterCollidingWithBottles();
         this.endbossIsCollidingWithBottles();
+        this.characterCollidingWithEndboss();
 
     };
 
     characterCollidingWithEnemy() {
-        // colliding with small chicken
-        this.level.enemies.forEach((enemy) => {
-            if (this.character.isColliding(enemy)) {
+        // colliding with chicken
+        this.level.enemies.forEach((enemy, index) => {
+            if (this.character.isColliding(enemy, index)) {
+                if (this.character.isAboveGround() && this.character.speedY <= 0) {
+                    this.character.automaticJumpOnEnemy();
+                    this.jumpOnEnemyCollision(enemy, index)
+                } else {
+                    this.character.hit();
+                    this.healthBar.setPercentage(this.character.energy);
+                }
+
+            }
+        })
+    }
+
+    characterCollidingWithEndboss() {
+        this.level.endboss.forEach((endboss) => {
+            if (this.character.isColliding(endboss)) {
                 this.character.hit();
                 this.healthBar.setPercentage(this.character.energy);
             }
-        })
+        });
+    }
+
+    jumpOnEnemyCollision(enemy) {
+        const enemyIndex = this.level.enemies.indexOf(enemy);
+        if (enemyIndex !== -1 && !enemy.isDead) {
+            this.character.immune = true;
+            setTimeout(() => {
+                this.level.enemies.splice(enemyIndex, 1);
+                this.character.immune = false;
+            }, 200);
+            enemy.isDead = true;
+        }
     }
 
     characterCollidingWithCoins() {
@@ -74,13 +102,20 @@ class World {
     }
 
     endbossIsCollidingWithBottles() {
-        this.throwableObject.forEach((bottle) => {
+        this.throwableObject.forEach((bottle, index) => {
             this.level.endboss.forEach((endboss) => {
                 if (bottle.isColliding(endboss)) {
-                    if (endboss instanceof Endboss) {
-                        endboss.endbossEnergy -= 20;
-                        this.endbossBar.setPercentage(endboss.endbossEnergy);
-                        //enemy.lastHit = new Date().getTime();
+                    endboss.takesDamageFromBottle();
+                    endboss.endbossLosingEnergy();
+                    this.endbossBar.setPercentage(endboss.endbossEnergy);
+                    setTimeout(() => {
+                        bottle.breakAndSplash();
+                        this.throwableObject.splice(index, 1);
+                    }, 90);
+                    if (endboss.isDead) {
+                        setTimeout(() => {
+                            this.level.endboss.splice(index, 1);
+                        }, 400);
                     }
                 }
             });
@@ -98,7 +133,7 @@ class World {
                 this.bottleBar.setPercentage(this.character.bottle);
             }
         }
-        
+
     }
 
     draw() {// Order is importent (kinda like z-index)

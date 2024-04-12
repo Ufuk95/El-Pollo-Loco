@@ -7,7 +7,6 @@ class Endboss extends MovableObject {
     endbossAttack = false;
     inDamage = false;
     angry = false;
-    endbossProtection = false;
     isAlert = false;
     isDead = false;
     endbossMoveLeft = false;
@@ -76,7 +75,7 @@ class Endboss extends MovableObject {
     }
 
 
-    hitEndbosswithBottle() {
+    takesDamageFromBottle() {
         this.inDamage = true;
         setTimeout(() => {
             this.inDamage = false
@@ -84,19 +83,10 @@ class Endboss extends MovableObject {
     }
 
     endbossLosingEnergy() {
-        if (!this.endbossProtection) {
-            this.endbossProtection = true;
-            this.endbossEnergy - 20;
-            this.speed += 0.2;
-            if (this.endbossEnergy < 0) {
-                this.endbossEnergy = 0;
-                this.endbossIsDead();
-            } else {
-                this.lastHit = new Date().getTime();
-            }
-            setTimeout(() => {
-                this.endbossProtection = false;
-            }, 300);
+        this.endbossEnergy -= 20;
+        if (this.endbossEnergy <= 0) {
+            this.endbossEnergy = 0;
+            this.endbossIsDead();
         }
         this.angryEndboss();
     }
@@ -121,15 +111,6 @@ class Endboss extends MovableObject {
         this.x -= this.angrySpeed;
     }
 
-    /**
-    * move the endboss angry to the right
-    *
-    */
-    endbossMovingRight() {
-        this.x += this.angrySpeed;
-    }
-
-
 
     /**
    * Checks if the Endboss is dead based on the energy level.
@@ -146,30 +127,17 @@ class Endboss extends MovableObject {
                 this.speed = 0;
                 return;
             }
-            if (this.endbossMoveLeft) {
-                if (this.otherDirection) {
-                    this.endbossMovingRight();
-                } else {
-                    this.endbossMoveLeft();
-                }
-            } else {
-                if (this.otherDirection) {
-                    this.moveRight();
-                } else {
-                    this.moveLeft();
-                }
-            }
         }, 1000 / 25)
     }
 
-    updateCurrentState(){
+    updateCurrentState() {
         if (this.isDead) {
             this.playAnimation(this.IMAGES_DEAD);
-        } else if(this.angry){
+        } else if (this.angry) {
             this.playAnimation(this.IMAGES_ATTACK);
-        } else if(this.isAlert){
+        } else if (this.isAlert) {
             this.playAnimation(this.IMAGES_ALERT);
-        } else if(this.inDamage){
+        } else if (this.inDamage) {
             this.playAnimation(this.IMAGES_HURT);
         } else {
             this.playAnimation(this.IMAGES_WALKING);
@@ -180,8 +148,9 @@ class Endboss extends MovableObject {
 
     animate() {
         setInterval(() => {
-            this.playAnimation(this.IMAGES_ALERT);
-        }, 130);
+            this.updateCurrentState();
+        }, 9000 / 60);
+        
     }
 
     // animate() {
