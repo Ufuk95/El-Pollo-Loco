@@ -45,14 +45,14 @@ class DrawableObject {
     drawFrame(ctx) {
         if (this instanceof Character || this instanceof Chicken || this instanceof Coin || this instanceof Endboss || this instanceof Bottle || this instanceof ThrowableObject || this instanceof SmallChicken) {
             ctx.beginPath();
-            ctx.lineWidth = '2';
-            ctx.strokeStyle = 'green';
+            ctx.lineWidth = '0';
+            ctx.strokeStyle = 'transparent'; // green
             ctx.rect(this.x, this.y, this.width, this.height);
             ctx.stroke();
         
             ctx.beginPath();
-            ctx.lineWidth = '2';
-            ctx.strokeStyle = 'red';
+            ctx.lineWidth = '0';
+            ctx.strokeStyle = 'transparent'; // red
             ctx.rect(
                 this.x + this.offset.left,
                 this.y + this.offset.top,

@@ -8,7 +8,6 @@ class MovableObject extends DrawableObject {
     coin_bar = 0;
     bottle = 0;
     bottlesAmount = 0;
-    protection = false;
     offset = {
         top: 0,
         bottom: 0,
@@ -82,17 +81,11 @@ class MovableObject extends DrawableObject {
      * function for getting hit by enemys
      */
     hit() {
-        if (!this.protection) {
-            this.protection = true;
-            this.energy -= 5;
-            if (this.energy < 0) {
-                this.energy = 0;
-            } else {
-                this.lastHit = new Date().getTime();
-            }
-            setTimeout(() => {
-                this.protection = false;
-            }, 500);
+        this.energy -= 5;
+        if (this.energy < 0) {
+            this.energy = 0;
+        } else {
+            this.lastHit = new Date().getTime();
         }
     }
 
@@ -125,14 +118,6 @@ class MovableObject extends DrawableObject {
             this.y + this.height - this.offset.bottom > mo.y + mo.offset.top &&
             this.x + this.offset.left < mo.x + mo.width - mo.offset.right &&
             this.y + this.offset.top < mo.y + mo.height - mo.offset.bottom;
-    }
-
-    isCollidingFromTopToBottom() {
-        return this.y + this.height - this.offset.bottom > mo.y + mo.offset.top;
-    }
-
-    isCollidingFromBottomToTop() {
-        return this.y + this.offset.top < mo.y + mo.height - mo.offset.bottom;
     }
 
 
@@ -178,7 +163,7 @@ class MovableObject extends DrawableObject {
         this.speedY = 22;
     }
 
-    automaticJumpOnEnemy(){
+    automaticJumpOnEnemy() {
         this.speedY = 15;
     }
 }

@@ -26,14 +26,14 @@ class Coin extends MovableObject{
     }
 
     randomCoinPosition(){
-        this.x = 400 + Math.random() * (2 * 719 - 100);
+        this.x = 350 + Math.random() * 1500;
         this.y = 330 - Math.random() * 150;
     }
 
     animate(){
         setInterval(() => {
             this.playAnimation(this.IMAGES_COINS);
-          }, 300);
+          }, 250);
     }
 
 }

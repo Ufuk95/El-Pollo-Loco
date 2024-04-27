@@ -2,15 +2,15 @@ let canvas;
 let world;
 let keyboard = new Keyboard()
 
+let game_audio = new Audio('../audio/game-sound.mp3')
+
 
 
 function init(){
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
-
-    console.log('my character is ', world.character)
-    console.log('my enemie is ', world.level.enemies)
 }
+
 
 
 window.addEventListener('keydown', (event) =>{
@@ -53,4 +53,28 @@ window.addEventListener('keyup', (event) =>{
     if (event.keyCode == 68) {
         keyboard.D = false;
     }
+    
 })
+
+
+function gameStart(){
+    init();
+    document.getElementById('start-container').classList.add('d-none');
+    
+}
+
+
+function gameSound() {
+    var volUp = document.getElementById('vol_up');
+    var volOff = document.getElementById('vol_off');
+    
+    if (volUp.classList.contains('d-none')) {
+        volUp.classList.remove('d-none');
+        volOff.classList.add('d-none');
+        game_audio.play();
+    } else {
+        volUp.classList.add('d-none');
+        volOff.classList.remove('d-none');
+        game_audio.pause();
+    }
+}

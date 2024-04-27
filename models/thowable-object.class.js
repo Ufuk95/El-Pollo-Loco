@@ -19,7 +19,7 @@ class ThrowableObject extends MovableObject {
         'img/6_salsa_bottle/bottle_rotation/bottle_splash/3_bottle_splash.png',
         'img/6_salsa_bottle/bottle_rotation/bottle_splash/4_bottle_splash.png',
         'img/6_salsa_bottle/bottle_rotation/bottle_splash/5_bottle_splash.png',
-        'img/6_salsa_bottle/bottle_rotation/bottle_splash/6_bottle_splash.png',
+        'img/6_salsa_bottle/bottle_rotation/bottle_splash/6_bottle_splash.png'
     ];
 
     offset = { top: 15, bottom: 15, left: 15, right: 15 };
@@ -58,7 +58,7 @@ class ThrowableObject extends MovableObject {
         this.isBreaking = true;
         setInterval(() => {
             this.playAnimation(this.BOTTLE_SPLASH);
-        }, 300)
+        }, 60) // auf 20 klappt es auch gut
         this.speedY = 0;
         this.speedX = 0;
         this.splash_audio.play();
@@ -68,7 +68,7 @@ class ThrowableObject extends MovableObject {
     bottleIsRotating() {
         setInterval(() => {
             this.playAnimation(this.BOTTLE_ROTATION);
-        }, 80);
+        }, 150);
         this.throw_audio.play();
     }
 }

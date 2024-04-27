@@ -1,5 +1,6 @@
 class Endboss extends MovableObject {
-    angrySpeed = 3
+    angrySpeed = 3.5;
+    speed = 0.25;
     y = 50;
     height = 400;
     width = 300;
@@ -12,7 +13,7 @@ class Endboss extends MovableObject {
     endbossMoveLeft = false;
     endbossEnergy = 100;
     offset = {
-        top: 150,
+        top: 200,
         bottom: 80,
         left: 30,
         right: 30
@@ -107,7 +108,7 @@ class Endboss extends MovableObject {
     * move the endboss angry to the left
     *
     */
-    endbossMovingLeft() {
+    endbossMovingLeftAngry() {
         this.x -= this.angrySpeed;
     }
 
@@ -125,36 +126,40 @@ class Endboss extends MovableObject {
         setInterval(() => {
             if (this.isAlert) {
                 this.speed = 0;
+                setTimeout(() => {
+                    this.endbossMovingLeftAngry();
+                }, 500);
+                this.speed = 0.3;
                 return;
+            }
+            if (this.otherDirection) {
+                this.moveRight();
+            } else {
+                this.moveLeft();
             }
         }, 1000 / 25)
     }
 
     updateCurrentState() {
-        if (this.isDead) {
-            this.playAnimation(this.IMAGES_DEAD);
-        } else if (this.angry) {
-            this.playAnimation(this.IMAGES_ATTACK);
-        } else if (this.isAlert) {
-            this.playAnimation(this.IMAGES_ALERT);
-        } else if (this.inDamage) {
-            this.playAnimation(this.IMAGES_HURT);
-        } else {
-            this.playAnimation(this.IMAGES_WALKING);
-        }
+        setInterval(() => {
+            if (this.isDead) {
+                this.playAnimation(this.IMAGES_DEAD);
+            } else if (this.angry) {
+                this.playAnimation(this.IMAGES_ATTACK);
+            } else if (this.isAlert) {
+                this.playAnimation(this.IMAGES_ALERT);
+            } else if (this.inDamage) {
+                this.playAnimation(this.IMAGES_HURT);
+            } else {
+                this.playAnimation(this.IMAGES_WALKING);
+            }
+        }, 175);
     }
 
 
 
     animate() {
-        setInterval(() => {
-            this.updateCurrentState();
-        }, 9000 / 60);
-        
+        this.updateCurrentState();
+        this.endbossMovementSetup();
     }
-
-    // animate() {
-    //     this.endbossMovementSetup();
-    //     this.updateCurrentState();
-    // }
 }

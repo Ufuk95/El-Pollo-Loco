@@ -68,10 +68,8 @@ class World {
     jumpOnEnemyCollision(enemy) {
         const enemyIndex = this.level.enemies.indexOf(enemy);
         if (enemyIndex !== -1 && !enemy.isDead) {
-            this.character.immune = true;
             setTimeout(() => {
                 this.level.enemies.splice(enemyIndex, 1);
-                this.character.immune = false;
             }, 200);
             enemy.isDead = true;
         }
@@ -108,14 +106,14 @@ class World {
                     endboss.takesDamageFromBottle();
                     endboss.endbossLosingEnergy();
                     this.endbossBar.setPercentage(endboss.endbossEnergy);
+                    bottle.breakAndSplash();
                     setTimeout(() => {
-                        bottle.breakAndSplash();
                         this.throwableObject.splice(index, 1);
                     }, 90);
                     if (endboss.isDead) {
                         setTimeout(() => {
                             this.level.endboss.splice(index, 1);
-                        }, 400);
+                        }, 700);
                     }
                 }
             });

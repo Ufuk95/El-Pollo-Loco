@@ -34,13 +34,42 @@
 
 
 
-<body onload="init()">
+<body>
 
     <h1>EL POLLO LOCO</h1>
 
-    <canvas id="canvas" width="720px" height="480px">
 
-    </canvas>
+    <div class="full-container">
+
+        <div class="start-container" id="start-container">
+            <div class="btn-settings">
+                <button class="header-btn" id="sound-btn" onclick="gameSound()">
+                    <img class="volume d-none" id="vol_up" src="./img/10_menu/vol_up.png" alt="volume up">
+                    <img class="volume" id="vol_off" src="./img/10_menu/vol_off.png" alt="volume off">
+                </button>
+
+                <button id="info-btn" class="header-btn" onclick="gameInfo()">
+                    <img src="./img/10_menu/info.png" alt="info">
+                </button>
+
+                <button class="header-btn">
+                    <img src="./img/10_menu/preview.png" alt="preview">
+                </button>
+                
+                <button class="header-btn">
+                    <img src="./img/10_menu/setting.png" alt="setting">
+                </button>
+            </div>
+            <div class="button-prep">
+                <button id="start-button" onclick="gameStart()">Start</button>
+            </div>
+            <img id="start-image" src="./img/9_intro_outro_screens/start/startscreen_2.png" alt="start-image">
+        </div>
+
+
+        <canvas id="canvas" width="720px" height="480px">
+        </canvas>
+    </div>
 </body>
 
 </html>
