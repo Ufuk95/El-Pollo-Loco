@@ -144,13 +144,13 @@ class Character extends MovableObject {
             }
 
             if (!this.isDead()) {
-                if (this.idleTimer >= 30 * 6) {
+                if (this.idleTimer >= 60) {
                     this.playAnimation(this.IMAGES_LONG_IDLE);
-                } else if (this.idleTimer >= 30 * 3) {
+                } else if (this.idleTimer >= 1) {
                     this.playAnimation(this.IMAGES_IDLE);
                 }
             }
-        }, 60);
+        }, 100);
     }
 
     pepeAnimation() {

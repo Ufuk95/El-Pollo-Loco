@@ -76,3 +76,40 @@ canvas {
     justify-content: center;
     align-items: center;
 }
+
+
+/* pop up section for information */
+
+.gameInfo {
+    position: absolute;
+    width: 50%;
+    background-color: #ffffffcf;
+    top: 42px;
+}
+
+.gameSetting {
+    position: absolute;
+    width: 50%;
+    background-color: #ffffffab;
+    top: 42px;
+}
+.control {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.control p {
+    width: 50%;
+    display: flex;
+}
+.letter-d {
+    width: 24px;
+    height: 24px;
+    background-color: white
+}
+
+.keyboard-btn {
+    background-color: white;
+}
