@@ -6,12 +6,6 @@ let game_audio = new Audio('../audio/game-sound.mp3')
 
 
 
-function init() {
-    canvas = document.getElementById('canvas');
-    world = new World(canvas, keyboard);
-}
-
-
 
 window.addEventListener('keydown', (event) => {
     if (event.keyCode == 39) {
@@ -58,10 +52,17 @@ window.addEventListener('keyup', (event) => {
 
 
 function gameStart() {
-    init();
-    document.getElementById('start-container').classList.add('d-none');
-
+    setTimeout(() => {
+        initLevel();
+        canvas = document.getElementById('canvas');
+        world = new World(canvas, keyboard);
+    }, 1000);
+    document.getElementById('info-btn').classList.add('d-none');
+    document.getElementById('setting-btn').classList.add('d-none');
+    document.getElementById('start-button').classList.add('d-none');
+    document.getElementById('start-image').classList.add('d-none');
 }
+
 
 
 function gameInfo() {
@@ -115,25 +116,43 @@ function gameSettings() {
         <svg class="letter-d" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M0 96C0 60.7 28.7 32 64 32h96c123.7 0 224 100.3 224 224s-100.3 224-224 224H64c-35.3 0-64-28.7-64-64V96zm160 0H64V416h96c88.4 0 160-71.6 160-160s-71.6-160-160-160z"/></svg>
         <p>press D for throwing bottle</p>
     </div>`;
-    
+
     document.addEventListener('click', closeGameSettings);
-    setting.addEventListener('click', function(event) {
+    setting.addEventListener('click', function (event) {
         event.stopPropagation();
     });
 }
 
 function closeGameSettings() {
     let setting = document.getElementById('gameSetting');
-    setting.innerHTML = ''; 
-    document.removeEventListener('click', closeGameSettings); 
+    setting.innerHTML = '';
+    document.removeEventListener('click', closeGameSettings);
 }
 
-document.getElementById('setting-btn').addEventListener('click', function(event) {
+document.getElementById('setting-btn').addEventListener('click', function (event) {
     event.stopPropagation();
 });
 
 
+function gameOver() {
+    document.getElementById('gameOver').classList.remove('d-none');
+    document.getElementById('sound-btn').classList.add('d-none');
+    game_audio.pause();
+    stopGame();
+}
 
+
+function gameWin() {
+    document.getElementById('gameWin').classList.remove('d-none');
+    game_audio.pause();
+    stopGame();
+}
+
+function stopGame() {
+    for (let i = 1; i < 9999; i++) {
+        window.clearInterval(i);
+    }
+}
 
 
 function gameSound() {
@@ -149,4 +168,25 @@ function gameSound() {
         volOff.classList.remove('d-none');
         game_audio.pause();
     }
+}
+
+
+function backToMenu() {
+
+    document.getElementById('gameWin').classList.add('d-none');
+    document.getElementById('gameOver').classList.add('d-none');
+
+    document.getElementById('info-btn').classList.remove('d-none');
+    document.getElementById('setting-btn').classList.remove('d-none');
+    document.getElementById('start-button').classList.remove('d-none');
+    document.getElementById('start-image').classList.remove('d-none');
+
+    document.getElementById('sound-btn').classList.remove('d-none');
+}
+
+function restartGame() {
+    document.getElementById("canvas").classList.remove('d-none');
+    document.getElementById('gameWin').classList.add('d-none');
+    document.getElementById('gameOver').classList.add('d-none');
+    gameStart();
 }

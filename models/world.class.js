@@ -68,8 +68,10 @@ class World {
     jumpOnEnemyCollision(enemy) {
         const enemyIndex = this.level.enemies.indexOf(enemy);
         if (enemyIndex !== -1 && !enemy.isDead) {
+            this.character.damageProtection = true
             setTimeout(() => {
                 this.level.enemies.splice(enemyIndex, 1);
+                this.character.damageProtection = false;
             }, 200);
             enemy.isDead = true;
         }

@@ -144,6 +144,9 @@ class Endboss extends MovableObject {
         setInterval(() => {
             if (this.isDead) {
                 this.playAnimation(this.IMAGES_DEAD);
+                setTimeout(() => {
+                    gameWin();
+                }, 900);
             } else if (this.angry) {
                 this.playAnimation(this.IMAGES_ATTACK);
             } else if (this.isAlert) {

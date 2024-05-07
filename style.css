@@ -9,7 +9,7 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
     backdrop-filter: brightness(0.5);
-    
+    font-family: 'Rye-Regular.ttf';
 }
 
 
@@ -17,8 +17,44 @@ canvas {
     background-color: black;
 }
 
+@font-face {
+    font-family: "Rye-Regular.ttf";
+    src: url("./font/Rye-Regular.ttf");
+}
+
+/* h1 {
+    font-size: 64px;
+    background: linear-gradient(to bottom, rgb(255 160 6 / 21%), rgb(255 222 1 / 63%), rgb(255 160 6 / 12%));
+    color: #39210078;
+    border-radius: 22px;
+} */
+
+h1 {
+    font-size: 64px;
+    background: linear-gradient(to bottom, rgb(255 160 6 / 21%), rgb(255 222 1 / 63%), rgb(255 160 6 / 12%));
+    color: #8b4513;
+    border-radius: 22px;
+    transition: color 0.3s ease-in-out;
+}
+
+h1:hover {
+    color: #fffbdb;
+    text-shadow: 0 0 10px #ffd700, 0 0 20px #ff8c00, 0 0 30px #ffd700, 0 0 40px #ffd700, 0 0 50px #ff8c00, 0 0 60px #ffd700, 0 0 70px #ffd700;
+    background: none;
+}
+
+h2 {
+    font-size: 64px;
+    color: #fffbdb;
+    text-shadow: 0 0 10px #ffd700, 0 0 20px #ff8c00, 0 0 30px #ffd700, 0 0 40px #ffd700, 0 0 50px #ff8c00, 0 0 60px #ffd700, 0 0 70px #ffd700;
+    border-radius: 22px;
+    transition: color 0.3s ease-in-out;
+}
+
+
+
 .d-none {
-    display: none;
+    display: none !important;
 }
 
 .start-container {
@@ -45,12 +81,22 @@ canvas {
     width: 150px;
     height: 48px;
     background: linear-gradient(to bottom, rgb(255, 160, 6), rgb(255, 222, 1), rgb(255, 160, 6));
-    font-size: 36px;
+    font-size: 32px;
     font-family: "Rye-Regular.ttf";
     cursor: pointer;
     border-radius: 12px;
     border: none;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
+
+.button-prep button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    transition: color 0.2s ease-in-out;
+    color: #ffffffc1;
+}
+
+
 
 
 /* volume button  */
@@ -89,10 +135,11 @@ canvas {
 
 .gameSetting {
     position: absolute;
-    width: 50%;
+    width: 45%;
     background-color: #ffffffab;
     top: 42px;
 }
+
 .control {
     display: flex;
     justify-content: center;
@@ -104,6 +151,7 @@ canvas {
     width: 50%;
     display: flex;
 }
+
 .letter-d {
     width: 24px;
     height: 24px;
@@ -113,3 +161,157 @@ canvas {
 .keyboard-btn {
     background-color: white;
 }
+
+
+/* game over section  */
+
+.gameOver {
+    position: absolute;
+    background-color: #0000009c;
+}
+
+.gameOver img {
+    width: 720px;
+    height: 480px;
+}
+
+.gameOverButtonContainer {
+    display: flex;
+    justify-content: space-around;
+    width: 720px;
+    position: absolute;
+    top: 80px;
+}
+
+.gameOverButton {
+    background: linear-gradient(to bottom, rgb(255, 160, 6), rgb(255, 222, 1), rgb(255, 160, 6));
+    width: 210px;
+    height: 64px;
+    font-size: 24px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-family: "Rye-Regular.ttf";
+}
+
+/* game win section  */
+
+.gameWin {
+    position: absolute;
+    width: 720px;
+    height: 480px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #00000094;
+}
+
+.winHeadline {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+/* landscape area */
+
+.overlayMobile {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    display: flex;
+    background-color: #ffb163;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.turnScreenIcon {
+    width: 300px;
+    height: auto;
+}
+
+.turnScreenBox p {
+    font-size: 32px;
+}
+
+@media (min-width: 800px) {
+    .overlayMobile {
+        display: none;
+    }
+}
+
+
+@media (max-width: 450px) and (max-height: 1000px) {
+    .start-container,
+    canvas {
+        display: none;
+    }
+}
+
+/* mobile fuction */
+
+@media (max-width: 1000px) and (max-height: 500px) {
+    .start-container{
+        top: 0;
+        bottom: 0;
+    }
+    #start-image {
+        height: 100%;
+    }
+    h1 {
+        display: none;
+    }
+    .gameInfo {
+        bottom: 0;
+        top: auto;
+        background-color: burlywood;
+    }
+    .gameSetting {
+        bottom: 0;
+        top: auto;
+        background-color: burlywood;
+    }
+    .button-prep button {
+        position: absolute;
+    }
+    canvas {
+        height: 100vh;
+        width: 720px;
+    }
+    .gameWin {
+        height: 100vh;
+        width: 720px;
+    }
+    .gameOver {
+        height: 100vh;
+        width: 720px;
+    }
+    .gameOver img {
+        height: 100vh;
+        width: 720px;
+    }
+}
+
+/* @media only screen and (max-height: 600px) {
+    .button-prep,
+    canvas {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-height: 480px) {
+    .full-container,
+    .button-prep,
+    canvas {
+        width: 720px !important;
+        height: -webkit-fill-available;
+    }
+    .full-container {
+        overflow: hidden;
+    }
+} */

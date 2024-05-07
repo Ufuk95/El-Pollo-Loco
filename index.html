@@ -36,11 +36,14 @@
 
 <body>
 
+
     <h1>EL POLLO LOCO</h1>
 
 
-    <div class="full-container">
 
+
+    <div class="full-container">
+        <!-- Menu/Start area -->
         <div class="start-container" id="start-container">
             <div class="btn-settings">
                 <button class="header-btn" id="sound-btn" onclick="gameSound()">
@@ -59,10 +62,6 @@
                     <div id="gameSetting" class="gameSetting">
                     </div>
                 </button>
-                
-                <button class="header-btn">
-                    <img src="./img/10_menu/setting.png" alt="setting">
-                </button>
             </div>
             <div class="button-prep">
                 <button id="start-button" onclick="gameStart()">Start</button>
@@ -70,6 +69,38 @@
             <img id="start-image" src="./img/9_intro_outro_screens/start/startscreen_2.png" alt="start-image">
         </div>
 
+
+        <!-- gameover area -->
+        <div class="gameOver d-none" id="gameOver">
+            <div class="gameOverButtonContainer">
+                <button class="gameOverButton" id="menuButton" onclick="backToMenu()">Back to Menu</button>
+                <button class="gameOverButton" id="restartButton" onclick="restartGame()">Restart</button>
+            </div>
+            <img src="./img/9_intro_outro_screens/game_over/game over!.png" alt="">
+        </div>
+
+
+        <!-- game winning area  -->
+        <div class="gameWin d-none" id="gameWin">
+            <div class="">
+                <button class="gameOverButton" id="menuButton" onclick="backToMenu()">Back to Menu</button>
+                <button class="gameOverButton" id="restartButton" onclick="restartGame()">Restart</button>
+            </div>
+            <div>
+                <h2 class="winHeadline">¡YOU WIN!</h2>
+            </div>
+        </div>
+
+
+        <!-- landscape area -->
+        <div class="overlayMobile">
+            <div class="turnScreenBox" id="turnScreen">
+                <img class="turnScreenIcon" src="./img/10_menu/turn-device.png" alt="">
+                <p>Please rotate your device into landscape mode</p>
+            </div>
+        </div>
+
+        
 
         <canvas id="canvas" width="720px" height="480px">
         </canvas>
