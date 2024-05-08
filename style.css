@@ -22,12 +22,29 @@ canvas {
     src: url("./font/Rye-Regular.ttf");
 }
 
-/* h1 {
-    font-size: 64px;
-    background: linear-gradient(to bottom, rgb(255 160 6 / 21%), rgb(255 222 1 / 63%), rgb(255 160 6 / 12%));
-    color: #39210078;
-    border-radius: 22px;
-} */
+.headLine {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+}
+
+.headlineImage {
+    width: 30px;
+    height: 30px;
+    background-color: rgb(255, 216, 0, 0.66);
+    border-radius: 20px;
+    object-fit: cover;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
+}
+
+.headlineImage:hover {
+    transform: scale(1.1); 
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    background-color: rgb(255, 216, 0, 1);
+}
+
 
 h1 {
     font-size: 64px;

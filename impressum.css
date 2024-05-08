@@ -1,0 +1,22 @@
+body {
+    margin: 0;
+    background-image: url(./img/5_background/bg.jpg);
+    backdrop-filter: brightness(0.5);
+    background-position: left center;
+    height: -webkit-fill-available;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    padding: 20px;
+    width: -webkit-fill-available;
+    font-family: 'Rye-Regular.ttf';
+    color: beige;
+}
+
+@font-face {
+    font-family: "Rye-Regular.ttf";
+    src: url("./font/Rye-Regular.ttf");
+}
