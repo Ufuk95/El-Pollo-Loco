@@ -1,4 +1,8 @@
 let level1;
+
+/**
+ * function to load everything in the game (enemys, background images, items, objects)
+ */
 function initLevel() {
     level1 = new Level(
         [

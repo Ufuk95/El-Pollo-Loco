@@ -91,100 +91,181 @@ class Character extends MovableObject {
         this.animate();
     }
 
+
+    /**
+     * function to animate the main character pepe
+     */
     animate() {
         this.pepeKeyboardControlling();
         this.pepeFallsAsleep();
         this.pepeAnimation();
     }
 
+
+    /**
+     * function for all the keyboard controll of pepe
+     */
     pepeKeyboardControlling() {
-        // Animation for walking and jumping
         setInterval(() => {
-            this.walking_audio.pause();
-            if (this.world.keyboard.LEFT && this.x > 0) {
-                this.moveLeft();
-                this.otherDirection = true;
-                this.walking_audio.play();
-                this.idleTimer = 0;
-            }
-            if (this.world.keyboard.RIGHT && this.x <= this.world.level.level_end_x) {
-                this.moveRight();
-                this.otherDirection = false;
-                this.walking_audio.play();
-                this.idleTimer = 0;
-            }
-
-
-            if (this.world.keyboard.SPACE && !this.isAboveGround()) {
-                this.jumping_audio.play();
-                this.jump();
-                this.idleTimer = 0;
-            }
-
-            if (this.world.keyboard.D) {
-                this.idleTimer = 0;
-                if (!this.isDead()) {
-                    this.loadImage(this.IMAGES_WALKING[0])
-                }
-
-            }
+            // this.walking_audio.pause();
+            this.pepeMovesToTheLeft();
+            this.pepeMovesToTheRight();
+            this.pepeJumps();
+            this.pepeThrowsBottle();
             this.world.camera_x = -this.x + 75;
         }, 1000 / 30)
     }
 
+
+    /**
+     * function to let pepe move to the left side
+     */
+    pepeMovesToTheLeft() {
+        if (this.world.keyboard.LEFT && this.x > 0) {
+            this.moveLeft();
+            this.otherDirection = true;
+            this.walking_audio.play();
+            this.idleTimer = 0;
+        }
+    }
+
+
+    /**
+     * function to let pepe move to the right side
+     */
+    pepeMovesToTheRight() {
+        if (this.world.keyboard.RIGHT && this.x <= this.world.level.level_end_x) {
+            this.moveRight();
+            this.otherDirection = false;
+            this.walking_audio.play();
+            this.idleTimer = 0;
+        }
+    }
+
+
+    /**
+     * function to let pepe jump
+     */
+    pepeJumps() {
+        if (this.world.keyboard.SPACE && !this.isAboveGround()) {
+            this.jumping_audio.play();
+            this.jump();
+            this.idleTimer = 0;
+        }
+    }
+
+
+    /**
+     * function to let pepe throw the salsa bottle
+     */
+    pepeThrowsBottle() {
+        if (this.world.keyboard.D) {
+            this.idleTimer = 0;
+            if (!this.isDead()) {
+                this.loadImage(this.IMAGES_WALKING[0])
+            }
+        }
+    }
+
+    /**
+     * function if pepe does not move for couple of seconds he falls asleep
+     */
     pepeFallsAsleep() {
         setInterval(() => {
-            if (
-                !this.world.keyboard.SPACE &&
-                !this.world.keyboard.RIGHT &&
-                !this.world.keyboard.LEFT &&
-                !this.world.keyboard.D
-            ) {
-                this.idleTimer += 1;
-            }
-
-            if (!this.isDead()) {
-                if (this.idleTimer >= 60) {
-                    this.playAnimation(this.IMAGES_LONG_IDLE);
-                } else if (this.idleTimer >= 1) {
-                    this.playAnimation(this.IMAGES_IDLE);
-                }
-            }
+            this.pepeIsAFK();
+            this.pepesSleepingTimerGoesUp();
         }, 100);
     }
 
+
+    /**
+     * pepe does not move
+     */
+    pepeIsAFK() {
+        if (
+            !this.world.keyboard.SPACE &&
+            !this.world.keyboard.RIGHT &&
+            !this.world.keyboard.LEFT &&
+            !this.world.keyboard.D
+        ) {
+            this.idleTimer += 1;
+        }
+    }
+
+
+    /**
+     * pepes timer goes up if hes not moving
+     */
+    pepesSleepingTimerGoesUp() {
+        if (!this.isDead()) {
+            if (this.idleTimer >= 60) {
+                this.playAnimation(this.IMAGES_LONG_IDLE);
+            } else if (this.idleTimer >= 1) {
+                this.playAnimation(this.IMAGES_IDLE);
+            }
+        }
+    }
+
+
+    /**
+     * all of pepes animation
+     */
     pepeAnimation() {
-        // IMG Animation for jumping and walking
         setInterval(() => {
             if (this.isDead(this.energy)) {
-                //dead animation
                 this.playDeathAnimation();
                 setTimeout(() => {
                     gameOver();
                 }, 1000);
             } else if (this.isAboveGround()) {
-                //jump animation
-                this.playAnimation(this.IMAGES_JUMPING);
-                this.setNewTimeStamp();
+                this.playJumpAnimation();
             } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
-                //Walk animation
-                this.playAnimation(this.IMAGES_WALKING);
-                this.setNewTimeStamp();
+                this.playWalkAnimation();
             } else if (this.isHurt()) {
-                this.playAnimation(this.IMAGES_HURT);
-                this.setNewTimeStamp();
-                this.idleTimer = 0;
+                this.playHurtAnimation();
             }
         }, 100);
     }
 
-    
 
+    /**
+     * pepes DEATH animation
+     */
     playDeathAnimation() {
         if (!this.deadAnimationPlayed) {
             this.playAnimation(this.IMAGES_DEAD);
             this.deadAnimationPlayed = true;
         }
+    }
+
+
+    /**
+     * pepes JUMP animation
+     */
+    playJumpAnimation() {
+        //jump animation
+        this.playAnimation(this.IMAGES_JUMPING);
+        this.setNewTimeStamp();
+    }
+
+
+    /**
+     * pepes WALK animation
+     */
+    playWalkAnimation() {
+        //Walk animation
+        this.playAnimation(this.IMAGES_WALKING);
+        this.setNewTimeStamp();
+    }
+
+
+    /**
+     * pepes HURT animation
+     */
+    playHurtAnimation() {
+        this.playAnimation(this.IMAGES_HURT);
+        this.setNewTimeStamp();
+        this.idleTimer = 0;
     }
 
 

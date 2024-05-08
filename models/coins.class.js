@@ -25,11 +25,18 @@ class Coin extends MovableObject{
         bottom: 55,
     }
 
+    /**
+     * random position of all coins in the game
+     */
     randomCoinPosition(){
         this.x = 350 + Math.random() * 1500;
         this.y = 330 - Math.random() * 150;
     }
 
+
+    /**
+     * animation function of the coins
+     */
     animate(){
         setInterval(() => {
             this.playAnimation(this.IMAGES_COINS);

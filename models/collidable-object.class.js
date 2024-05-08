@@ -1,6 +1,4 @@
 class CollidableObject extends MovableObject {
-
-
     offset = {
         top: 0,
         left: 0,
@@ -8,5 +6,4 @@ class CollidableObject extends MovableObject {
         bottom: 0,
     }
 
-    
 }

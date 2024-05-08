@@ -21,7 +21,11 @@ class Coinbar extends DrawableObject{
         this.setPercentage(0);
     }
 
-    // percentage(50);
+    /**
+     * percentage of every bar in the game
+     * 
+     * @param {number} percentage - 0 - 100 %
+     */
     setPercentage(percentage) {
         this.percentage = percentage;
         let path = this.COIN_STATUS[this.resolveHealthImageIndex()]
@@ -30,7 +34,7 @@ class Coinbar extends DrawableObject{
 
     /**
      * 
-     * @returns breaks down the healthbar if you get damage
+     * function to rise the bottlebar 
      */
     resolveHealthImageIndex() {
         if (this.percentage == 0) {

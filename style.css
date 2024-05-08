@@ -325,14 +325,13 @@ h2 {
     }
     .touchContainer {
         align-items: end;
-        /* height: -webkit-fill-available; */
         display: flex !important;
         bottom: 32px;
     }
     body {
         height: -webkit-fill-available;
     }
-    
+
 }
 
 

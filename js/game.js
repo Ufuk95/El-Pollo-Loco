@@ -1,56 +1,13 @@
 let canvas;
 let world;
 let keyboard = new Keyboard()
-
 let game_audio = new Audio('../audio/game-sound.mp3')
 
 
 
-
-window.addEventListener('keydown', (event) => {
-    if (event.keyCode == 39) {
-        keyboard.RIGHT = true;
-    }
-    if (event.keyCode == 37) {
-        keyboard.LEFT = true;
-    }
-    if (event.keyCode == 38) {
-        keyboard.UP = true;
-    }
-    if (event.keyCode == 40) {
-        keyboard.DOWN = true;
-    }
-    if (event.keyCode == 32) {
-        keyboard.SPACE = true;
-    }
-    if (event.keyCode == 68) {
-        keyboard.D = true;
-    }
-})
-
-window.addEventListener('keyup', (event) => {
-    if (event.keyCode == 39) {
-        keyboard.RIGHT = false;
-    }
-    if (event.keyCode == 37) {
-        keyboard.LEFT = false;
-    }
-    if (event.keyCode == 38) {
-        keyboard.UP = false;
-    }
-    if (event.keyCode == 40) {
-        keyboard.DOWN = false;
-    }
-    if (event.keyCode == 32) {
-        keyboard.SPACE = false;
-    }
-    if (event.keyCode == 68) {
-        keyboard.D = false;
-    }
-
-})
-
-
+/**
+ * start button to start the game
+ */
 function gameStart() {
     setTimeout(() => {
         initLevel();
@@ -64,7 +21,9 @@ function gameStart() {
 }
 
 
-
+/**
+ * function to show the welcome text for the game
+ */
 function gameInfo() {
     let gameInfo = document.getElementById('gameInfo');
     gameInfo.innerHTML = `
@@ -84,6 +43,9 @@ function gameInfo() {
     });
 }
 
+/**
+ * function to close game info by clicking somewhere else
+ */
 function closeGameInfo() {
     let gameInfo = document.getElementById('gameInfo');
     gameInfo.innerHTML = '';
@@ -95,7 +57,9 @@ document.getElementById('info-btn').addEventListener('click', function (event) {
 });
 
 
-
+/**
+ * function to show how to play the game
+ */
 function gameSettings() {
     let setting = document.getElementById('gameSetting');
     setting.innerHTML = `
@@ -123,6 +87,9 @@ function gameSettings() {
     });
 }
 
+/**
+ * function to close game setting by clicking somewhere else
+ */
 function closeGameSettings() {
     let setting = document.getElementById('gameSetting');
     setting.innerHTML = '';
@@ -134,6 +101,10 @@ document.getElementById('setting-btn').addEventListener('click', function (event
 });
 
 
+
+/**
+ * function to end the game after your loss
+ */
 function gameOver() {
     document.getElementById('gameOver').classList.remove('d-none');
     document.getElementById('sound-btn').classList.add('d-none');
@@ -142,12 +113,19 @@ function gameOver() {
 }
 
 
+/**
+ * function to end the game after your win
+ */
 function gameWin() {
     document.getElementById('gameWin').classList.remove('d-none');
     game_audio.pause();
     stopGame();
 }
 
+
+/**
+ * function to freeze the game 
+ */
 function stopGame() {
     for (let i = 1; i < 9999; i++) {
         window.clearInterval(i);
@@ -155,6 +133,9 @@ function stopGame() {
 }
 
 
+/**
+ * function to activate or deactivate the game sound
+ */
 function gameSound() {
     var volUp = document.getElementById('vol_up');
     var volOff = document.getElementById('vol_off');
@@ -170,20 +151,23 @@ function gameSound() {
     }
 }
 
-
+/**
+ * function to bring you back to the menu after the game ends
+ */
 function backToMenu() {
-
     document.getElementById('gameWin').classList.add('d-none');
     document.getElementById('gameOver').classList.add('d-none');
-
     document.getElementById('info-btn').classList.remove('d-none');
     document.getElementById('setting-btn').classList.remove('d-none');
     document.getElementById('start-button').classList.remove('d-none');
     document.getElementById('start-image').classList.remove('d-none');
-
     document.getElementById('sound-btn').classList.remove('d-none');
 }
 
+
+/**
+ * function to restart the game after the game ends
+ */
 function restartGame() {
     document.getElementById("canvas").classList.remove('d-none');
     document.getElementById('gameWin').classList.add('d-none');
