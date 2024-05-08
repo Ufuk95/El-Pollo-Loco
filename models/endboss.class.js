@@ -1,6 +1,6 @@
 class Endboss extends MovableObject {
     angrySpeed = 3.5;
-    speed = 0.25;
+    speed = 0.35;
     y = 50;
     height = 400;
     width = 300;
@@ -11,6 +11,7 @@ class Endboss extends MovableObject {
     isAlert = false;
     isDead = false;
     endbossMoveLeft = false;
+    chickenScream = new Audio('./audio/chickenScream.mp3')
     endbossEnergy = 100;
     offset = {
         top: 200,
@@ -81,6 +82,7 @@ class Endboss extends MovableObject {
      */
     takesDamageFromBottle() {
         this.inDamage = true;
+        this.chickenScream.play();
         setTimeout(() => {
             this.inDamage = false
         }, 500);
@@ -136,12 +138,12 @@ class Endboss extends MovableObject {
      */
     endbossMovementSetup() {
         setInterval(() => {
-            if (this.isAlert) {
+            if (this.inDamage) {
                 this.speed = 0;
                 setTimeout(() => {
                     this.endbossMovingLeftAngry();
                 }, 500);
-                this.speed = 0.6;
+                this.speed = 4.0;
                 return;
             }
             if (this.otherDirection) {

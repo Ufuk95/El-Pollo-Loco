@@ -1,7 +1,8 @@
 let canvas;
 let world;
 let keyboard = new Keyboard()
-let game_audio = new Audio('../audio/game-sound.mp3')
+let gameAudio = new Audio('../audio/game-sound.mp3')
+let winAudio = new Audio('./audio/win.mp3')
 
 
 
@@ -108,7 +109,8 @@ document.getElementById('setting-btn').addEventListener('click', function (event
 function gameOver() {
     document.getElementById('gameOver').classList.remove('d-none');
     document.getElementById('sound-btn').classList.add('d-none');
-    game_audio.pause();
+    gameAudio.pause();
+    winAudio.pause();
     stopGame();
 }
 
@@ -118,8 +120,9 @@ function gameOver() {
  */
 function gameWin() {
     document.getElementById('gameWin').classList.remove('d-none');
-    game_audio.pause();
+    gameAudio.pause();
     stopGame();
+    winAudio.play();
 }
 
 
@@ -143,11 +146,11 @@ function gameSound() {
     if (volUp.classList.contains('d-none')) {
         volUp.classList.remove('d-none');
         volOff.classList.add('d-none');
-        game_audio.play();
+        gameAudio.play();
     } else {
         volUp.classList.add('d-none');
         volOff.classList.remove('d-none');
-        game_audio.pause();
+        gameAudio.pause();
     }
 }
 
@@ -162,6 +165,7 @@ function backToMenu() {
     document.getElementById('start-button').classList.remove('d-none');
     document.getElementById('start-image').classList.remove('d-none');
     document.getElementById('sound-btn').classList.remove('d-none');
+    winAudio.pause();
 }
 
 
@@ -172,5 +176,6 @@ function restartGame() {
     document.getElementById("canvas").classList.remove('d-none');
     document.getElementById('gameWin').classList.add('d-none');
     document.getElementById('gameOver').classList.add('d-none');
+    winAudio.pause();
     gameStart();
 }

@@ -10,6 +10,7 @@ class World {
     bottleBar = new Bottlebar();
     endbossBar = new EndbossBar();
     throwableObject = [];
+    
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
