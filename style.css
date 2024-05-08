@@ -307,7 +307,7 @@ h2 {
     #start-image {
         height: 100%;
     }
-    h1 {
+    .headLine {
         display: none;
     }
     .gameInfo {
