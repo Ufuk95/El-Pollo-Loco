@@ -14,6 +14,9 @@ class Keyboard {
         this.touchControll();
     }
 
+    /**
+     * keyboard controlling
+     */
     KeyboardControll(){
         window.addEventListener('keydown', (event) => {
             if (event.keyCode == 39) {
@@ -60,7 +63,9 @@ class Keyboard {
     }
 
 
-
+    /**
+     * touch controlling for smartphones in landscape mode
+     */
     touchControll() {
         document.getElementById('moveLeftTouch').addEventListener('touchstart', (e) => {
           e.preventDefault();

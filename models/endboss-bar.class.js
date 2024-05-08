@@ -20,7 +20,11 @@ class EndbossBar extends MovableObject {
         this.setPercentage(100);
     }
 
-    // percentage(50);
+    /**
+     * percentage of every bar in the game
+     * 
+     * @param {number} percentage - 0 - 100 %
+     */
     setPercentage(percentage) {
         this.percentage = percentage;
         let path = this.ENDBOSS_STATUS[this.resolveHealthImageIndex()]
@@ -29,7 +33,7 @@ class EndbossBar extends MovableObject {
 
     /**
      * 
-     * @returns breaks down the healthbar if you get damage
+     * function to rise the healthbar from the endboss
      */
     resolveHealthImageIndex() {
         if (this.percentage == 100) {

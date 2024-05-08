@@ -35,6 +35,9 @@ class ThrowableObject extends MovableObject {
         this.bottleIsRotating();
     }
 
+    /**
+     * throw function for pepe
+     */
     throw() {
         this.throwBottle = true;
         this.speedY = 20;
@@ -52,8 +55,8 @@ class ThrowableObject extends MovableObject {
 
 
     /**
-   * Function to break and splash the bottle
-   */
+    * Function to break and splash the bottle
+    */
     breakAndSplash() {
         this.isBreaking = true;
         setInterval(() => {
@@ -65,6 +68,9 @@ class ThrowableObject extends MovableObject {
 
     }
 
+    /**
+     * rotation function for the bottle
+     */
     bottleIsRotating() {
         setInterval(() => {
             this.playAnimation(this.BOTTLE_ROTATION);

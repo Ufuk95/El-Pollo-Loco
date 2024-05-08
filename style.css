@@ -129,15 +129,15 @@ h2 {
 .gameInfo {
     position: absolute;
     width: 50%;
-    background-color: #ffffffcf;
-    top: 42px;
+    background-color: #f7ac2f;
+    bottom: 0;
 }
 
 .gameSetting {
     position: absolute;
     width: 45%;
-    background-color: #ffffffab;
-    top: 42px;
+    background-color: #f7ac2f;
+    bottom: 0;
 }
 
 .control {

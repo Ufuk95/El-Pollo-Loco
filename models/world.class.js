@@ -20,6 +20,9 @@ class World {
         this.run();
     }
 
+    /**
+     * summary of the colliding and throwable object
+     */
     run() {
         setInterval(() => {
             this.checkThrowableObject();
@@ -31,6 +34,9 @@ class World {
 
     }
 
+    /**
+     * all of the collisions between pepe and every other object
+     */
     checkCollisions() {
         this.characterCollidingWithEnemy();
         this.characterCollidingWithCoins();
@@ -40,6 +46,9 @@ class World {
 
     };
 
+    /**
+     * pepe colliding with enemys
+     */
     characterCollidingWithEnemy() {
         // colliding with chicken
         this.level.enemies.forEach((enemy, index) => {
@@ -56,6 +65,9 @@ class World {
         })
     }
 
+    /**
+     * pepe colliding with endboss
+     */
     characterCollidingWithEndboss() {
         this.level.endboss.forEach((endboss) => {
             if (this.character.isColliding(endboss)) {
@@ -65,6 +77,10 @@ class World {
         });
     }
 
+
+    /**
+     * pepe jumps on enemys
+     */
     jumpOnEnemyCollision(enemy) {
         const enemyIndex = this.level.enemies.indexOf(enemy);
         if (enemyIndex !== -1 && !enemy.isDead) {
@@ -77,6 +93,9 @@ class World {
         }
     }
 
+    /**
+     * pepe colliding with coins
+     */
     characterCollidingWithCoins() {
         // colliding with coins
         this.level.coins.forEach((coin, index) => {
@@ -88,6 +107,10 @@ class World {
         })
     }
 
+
+    /**
+     * pepe colliding with bottles
+     */
     characterCollidingWithBottles() {
         // colliding with salsa bottles
         this.level.bottles.forEach((bottle, index) => {
@@ -95,12 +118,15 @@ class World {
                 this.character.addThrowableBottless();
                 this.bottleBar.setPercentage(this.character.bottle);
                 this.character.bottlesAmount += 20;
-                console.log(this.character.bottlesAmount);
                 this.level.bottles.splice(index, 1);
             }
         })
     }
 
+
+    /**
+     * endboss colliding with bottles
+     */
     endbossIsCollidingWithBottles() {
         this.throwableObject.forEach((bottle, index) => {
             this.level.endboss.forEach((endboss) => {
@@ -123,6 +149,9 @@ class World {
     }
 
 
+    /**
+     *  function for the throwable object
+     */
     checkThrowableObject() {
         if (this.character.bottle > 0) {
             if (this.keyboard.D) {
@@ -133,14 +162,15 @@ class World {
                 this.bottleBar.setPercentage(this.character.bottle);
             }
         }
-
     }
 
+    /**
+     * function to draw every object to canvas 
+     * order is important
+     */
     draw() {// Order is importent (kinda like z-index)
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
         this.ctx.translate(this.camera_x, 0);
-
         this.addObjectsToMap(this.level.backgroundObjects);
         this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.level.coins);
@@ -148,43 +178,82 @@ class World {
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.level.endboss);
         this.addObjectsToMap(this.throwableObject);
+        this.showHealthBar();
+        this.showCoinBar();
+        this.showBottleBar();
+        this.showEndbossHealthBar();
+        this.showCharacter();
 
-        this.ctx.translate(-this.camera_x, 0);// backwards
-        this.addToMap(this.healthBar);
-        this.ctx.translate(this.camera_x, 0);// forwards
-
-        this.ctx.translate(-this.camera_x, 0);// backwards
-        this.addToMap(this.coinBar);
-        this.ctx.translate(this.camera_x, 0);// forwards
-
-        this.ctx.translate(-this.camera_x, 0);// backwards
-        this.addToMap(this.bottleBar);
-        this.ctx.translate(this.camera_x, 0);// forwards
-
-        // EndbossBar
-        if (this.character.x >= 1500) {
-            this.ctx.translate(-this.camera_x, 0); //back
-            this.addToMap(this.endbossBar);
-            this.ctx.translate(this.camera_x, 0); //forward
-        }
-
-        this.addToMap(this.character);
-        this.ctx.translate(-this.camera_x, 0);
-
-        // draw() wird immer wieder aufgerufen 
-        // in der requestAnimationFrame kennt er kein 'this'
         let self = this
         requestAnimationFrame(function () {
             self.draw();
         });
     }
 
+    /**
+     * function to show the healthbar
+     */
+    showHealthBar(){
+        this.ctx.translate(-this.camera_x, 0);// backwards
+        this.addToMap(this.healthBar);
+        this.ctx.translate(this.camera_x, 0);// forwards
+    }
+
+     /**
+     * function to show the coinbar
+     */
+    showCoinBar(){
+        this.ctx.translate(-this.camera_x, 0);// backwards
+        this.addToMap(this.coinBar);
+        this.ctx.translate(this.camera_x, 0);// forwards
+    }
+
+
+     /**
+     * function to show the bottlebar
+     */
+    showBottleBar(){
+        this.ctx.translate(-this.camera_x, 0);// backwards
+        this.addToMap(this.bottleBar);
+        this.ctx.translate(this.camera_x, 0);// forwards
+    }
+
+
+     /**
+     * function to show the endboss healthbar
+     */
+    showEndbossHealthBar(){
+        if (this.character.x >= 1500) {
+            this.ctx.translate(-this.camera_x, 0); //back
+            this.addToMap(this.endbossBar);
+            this.ctx.translate(this.camera_x, 0); //forward
+        }
+    }
+
+     /**
+     * function to show the character
+     */
+    showCharacter(){
+        this.addToMap(this.character);
+        this.ctx.translate(-this.camera_x, 0);
+    }
+
+    /**
+     * function to add objects to map
+     * @param {object} object 
+     */
     addObjectsToMap(object) {
         object.forEach(o => {
             this.addToMap(o);
         });
     }
 
+
+    /**
+     * function to add objects to map
+     * 
+     * @param {object} mo - movable object
+     */
     addToMap(mo) {
         if (mo.otherDirection) {
             this.flipImage(mo);
@@ -198,6 +267,12 @@ class World {
         };
     }
 
+
+    /**
+     * function to mirror for example the character if he goes to the other direction
+     * 
+     * @param {object} mo - movable object
+     */
     flipImage(mo) {
         this.ctx.save();
         this.ctx.translate(mo.width, 0);
@@ -205,11 +280,21 @@ class World {
         mo.x = mo.x * -1;
     }
 
+
+    /**
+     * function to mirror for example the character if he goes to the other direction and the goes back to the right direction
+     * 
+     * @param {object} mo - movable object
+     */
     flipImageBack(mo) {
         mo.x = mo.x * -1;
         this.ctx.restore();
     }
 
+
+    /**
+     * every "this" = this.character.world
+     */
     setWorld() {
         this.character.world = this;
     }

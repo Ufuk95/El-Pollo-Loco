@@ -76,6 +76,9 @@ class Endboss extends MovableObject {
     }
 
 
+    /**
+     * function to be able to damage the endboss
+     */
     takesDamageFromBottle() {
         this.inDamage = true;
         setTimeout(() => {
@@ -83,6 +86,9 @@ class Endboss extends MovableObject {
         }, 500);
     }
 
+    /**
+     * function for the endboss to be able to get damage
+     */
     endbossLosingEnergy() {
         this.endbossEnergy -= 20;
         if (this.endbossEnergy <= 0) {
@@ -92,6 +98,9 @@ class Endboss extends MovableObject {
         this.angryEndboss();
     }
 
+    /**
+     * endboss is able to get angry
+     */
     angryEndboss() {
         if (this.endbossEnergy <= 20) {
             this.isAlert = true;
@@ -114,14 +123,17 @@ class Endboss extends MovableObject {
 
 
     /**
-   * Checks if the Endboss is dead based on the energy level.
-   */
+    * Checks if the Endboss is dead based on the energy level.
+    */
     endbossIsDead() {
         if (this.endbossEnergy <= 0) {
             this.isDead = true;
         }
     }
 
+    /**
+     * endboss movement 
+     */
     endbossMovementSetup() {
         setInterval(() => {
             if (this.isAlert) {
@@ -129,7 +141,7 @@ class Endboss extends MovableObject {
                 setTimeout(() => {
                     this.endbossMovingLeftAngry();
                 }, 500);
-                this.speed = 0.3;
+                this.speed = 0.6;
                 return;
             }
             if (this.otherDirection) {
@@ -140,6 +152,9 @@ class Endboss extends MovableObject {
         }, 1000 / 25)
     }
 
+    /**
+     * endboss current state 
+     */
     updateCurrentState() {
         setInterval(() => {
             if (this.isDead) {
@@ -160,7 +175,9 @@ class Endboss extends MovableObject {
     }
 
 
-
+    /**
+     * animation for the endboss
+     */
     animate() {
         this.updateCurrentState();
         this.endbossMovementSetup();

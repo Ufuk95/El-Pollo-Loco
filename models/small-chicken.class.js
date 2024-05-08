@@ -35,6 +35,9 @@ class SmallChicken extends MovableObject {
         
     }
 
+    /**
+     * all the small chickens are moving forwards by jumping
+     */
     chickenJump() {
         if (this.y <= 250) {
             this.speedY = Math.abs(this.speedY);
@@ -45,6 +48,9 @@ class SmallChicken extends MovableObject {
         this.y += this.speedY;
     }
 
+    /**
+     * animation function for the small chicken
+     */
     animate() {
         setInterval(() => {
             this.moveLeft();

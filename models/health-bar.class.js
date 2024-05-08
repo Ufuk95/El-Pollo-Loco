@@ -21,7 +21,11 @@ class Healthbar extends DrawableObject {
         this.setPercentage(100);
     }
 
-    // percentage(50);
+    /**
+     * percentage of every bar in the game
+     * 
+     * @param {number} percentage - 0 - 100 %
+     */
     setPercentage(percentage) {
         this.percentage = percentage;
         let path = this.HEALTH_STATUS[this.resolveHealthImageIndex()]
@@ -30,7 +34,7 @@ class Healthbar extends DrawableObject {
 
     /**
      * 
-     * @returns breaks down the healthbar if you get damage
+     * function to rise the healthbar from the pepe
      */
     resolveHealthImageIndex() {
         if (this.percentage == 100) {

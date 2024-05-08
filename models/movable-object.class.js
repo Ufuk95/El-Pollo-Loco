@@ -60,6 +60,9 @@ class MovableObject extends DrawableObject {
         }
     }
 
+    /**
+     * after the throw the bottlebar goes down
+     */
     removeThrowableBottles() {
         this.bottle -= 20;
         if (this.bottle < 0) {
@@ -67,6 +70,9 @@ class MovableObject extends DrawableObject {
         }
     }
 
+    /**
+     * if the endboss gets hit by the bottle his healthbar goes down
+     */
     endbossIsLosingEnergy() {
         this.endbossEnergy -= 20;
         if (this.endbossEnergy < 0) {
@@ -129,6 +135,9 @@ class MovableObject extends DrawableObject {
     }
 
 
+    /**
+     * collecting function for the percentage
+     */
     isCollecting() {
         this.bottlesAmount += 20;
         if (this.bottlesAmount > 100) {
@@ -171,6 +180,9 @@ class MovableObject extends DrawableObject {
         this.speedY = 22;
     }
 
+    /**
+     * if the character jumps on enemy he jumps automatically higher on them
+     */
     automaticJumpOnEnemy() {
         this.speedY = 15;
     }
