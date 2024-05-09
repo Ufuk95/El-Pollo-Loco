@@ -40,7 +40,7 @@ canvas {
 }
 
 .headlineImage:hover {
-    transform: scale(1.1); 
+    transform: scale(1.1);
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
     background-color: rgb(255, 216, 0, 1);
 }
@@ -266,7 +266,6 @@ h2 {
     align-items: center;
     width: 700px;
     padding: 12px;
-    /* height: 100%; */
 }
 
 .controll {
@@ -291,6 +290,7 @@ h2 {
 
 
 @media (max-width: 450px) and (max-height: 1000px) {
+
     .start-container,
     canvas {
         display: none;
@@ -300,56 +300,103 @@ h2 {
 /* mobile fuction */
 
 @media (max-width: 1000px) and (max-height: 500px) {
-    .start-container{
+    .start-container {
         top: 0;
         bottom: 0;
     }
+
     #start-image {
         height: 100%;
     }
+
     .headLine {
         display: none;
     }
+
     .gameInfo {
         bottom: 0;
         top: auto;
         background-color: burlywood;
+        z-index: 1;
     }
+
     .gameSetting {
         bottom: 0;
         top: auto;
         background-color: burlywood;
+        z-index: 1;
     }
+
     .button-prep button {
         position: absolute;
         z-index: 11;
     }
+
     canvas {
         height: 100vh;
         width: 720px;
     }
+
     .gameWin {
         height: 100vh;
         width: 720px;
     }
+
     .gameOver {
         height: 100vh;
         width: 720px;
     }
+
     .gameOver img {
         height: 100vh;
         width: 720px;
     }
+
     .touchContainer {
         align-items: end;
         display: flex !important;
         bottom: 32px;
     }
+
     body {
         height: -webkit-fill-available;
+        width: -webkit-fill-available;
     }
-
 }
 
+@media (max-width: 680px) and (max-height: 400px) {
+    .overlayMobile {
+        display: none;
+    }
 
+    canvas {
+        height: 100vh;
+        width: 600px; 
+        max-width: 100%; 
+    }
 
+    .gameWin,
+    .gameOver {
+        height: 100vh;
+        width: 600px; 
+        max-width: 100%; 
+    }
+
+    .gameOver img {
+        height: 100vh;
+        width: 600px;
+        max-width: 100%; 
+    }
+
+    .touchContainer {
+        width: 575px;
+    }
+
+    #start-image{
+        width: 600px;
+    }
+
+    .gameOverButtonContainer {
+        width: 600px;
+    }
+}
